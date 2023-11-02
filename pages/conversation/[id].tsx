@@ -29,14 +29,14 @@ export default function Conversation() {
   }
 
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex h-screen flex-col">
       <Header />
       <Link href="/">
-        <a className="text-blue-500">Back</a>
+        <p className="text-blue-500">Back</p>
       </Link>
       <div className="flex-1 overflow-y-auto p-4">
         {messages.map((message, index) => (
-          <div key={index} className="p-2 rounded bg-blue-100 my-2 w-max">
+          <div key={index} className="my-2 w-max rounded bg-blue-100 p-2">
             {message.content}
           </div>
         ))}
@@ -46,20 +46,27 @@ export default function Conversation() {
           <input
             type="text"
             value={newMessage}
-            onChange={(e) => setNewMessage(e.target.value)}
-            className="w-full p-2 border rounded text-black"
+            onChange={e => setNewMessage(e.target.value)}
+            className="w-full rounded border p-2 text-black"
           />
-          <button type="submit" className="w-full py-2 bg-blue-500 text-white rounded">Send</button>
+          <button
+            type="submit"
+            className="w-full rounded bg-blue-500 py-2 text-white"
+          >
+            Send
+          </button>
         </form>
       </div>
     </div>
   )
 
   async function sendMessage(e: React.FormEvent) {
-    e.preventDefault();
+    e.preventDefault()
     const { data, error } = await supabase
       .from('messages')
-      .insert([{ content: newMessage, conversation_id: id, created_at: new Date() }])
+      .insert([
+        { content: newMessage, conversation_id: id, created_at: new Date() }
+      ])
     if (error) console.log('error', error)
     else {
       setNewMessage('')

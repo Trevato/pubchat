@@ -24,25 +24,30 @@ export default function Home() {
   return (
     <div>
       <Header />
-      <table className="w-full text-center mt-8">
+      <table className="mt-8 w-full text-center">
         <thead>
           <tr>
             <th>Conversation ID</th>
           </tr>
         </thead>
         <tbody>
-          {conversations.map((conversation) => (
+          {conversations.map(conversation => (
             <tr key={conversation.id}>
               <td>
                 <Link href={`/conversation/${conversation.id}`}>
-                  <a>Conversation {conversation.id}</a>
+                  Conversation {conversation.id}
                 </Link>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
-      <button className="w-full py-2 mt-4 bg-blue-500 text-white rounded" onClick={createConversation}>New Chat</button>
+      <button
+        className="mt-4 w-full rounded bg-blue-500 py-2 text-white"
+        onClick={createConversation}
+      >
+        New Chat
+      </button>
     </div>
   )
 
