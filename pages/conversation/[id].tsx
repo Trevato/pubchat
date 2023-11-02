@@ -2,6 +2,7 @@ import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { createClient } from '@supabase/supabase-js'
 import Header from '../../components/Header'
+import Link from 'next/link'
 
 const supabase = createClient(
   'https://bwkehkcxizbwmauxqayh.supabase.co',
@@ -30,6 +31,9 @@ export default function Conversation() {
   return (
     <div className="flex flex-col h-screen">
       <Header />
+      <Link href="/">
+        <a className="text-blue-500">Back</a>
+      </Link>
       <div className="flex-1 overflow-y-auto p-4">
         {messages.map((message, index) => (
           <div key={index} className="p-2 rounded bg-blue-100 my-2 w-max">
