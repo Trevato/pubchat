@@ -42,18 +42,21 @@ export default function Conversation() {
         ))}
       </div>
       <div className="flex-none">
-        <input
-          type="text"
-          value={newMessage}
-          onChange={(e) => setNewMessage(e.target.value)}
-          className="w-full p-2 border rounded"
-        />
-        <button className="w-full py-2 bg-blue-500 text-white rounded" onClick={sendMessage}>Send</button>
+        <form onSubmit={sendMessage}>
+          <input
+            type="text"
+            value={newMessage}
+            onChange={(e) => setNewMessage(e.target.value)}
+            className="w-full p-2 border rounded text-black"
+          />
+          <button type="submit" className="w-full py-2 bg-blue-500 text-white rounded">Send</button>
+        </form>
       </div>
     </div>
   )
 
-  async function sendMessage() {
+  async function sendMessage(e: React.FormEvent) {
+    e.preventDefault();
     const { data, error } = await supabase
       .from('messages')
       .insert([{ content: newMessage, conversation_id: id, created_at: new Date() }])
