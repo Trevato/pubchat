@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { createClient } from '@supabase/supabase-js'
+import Header from '../../components/Header'
 
 const supabase = createClient(
   'https://bwkehkcxizbwmauxqayh.supabase.co',
@@ -27,17 +28,24 @@ export default function Conversation() {
   }
 
   return (
-    <div>
-      <h1>Conversation {id}</h1>
-      {messages.map((message, index) => (
-        <p key={index}>{message.content}</p>
-      ))}
-      <input
-        type="text"
-        value={newMessage}
-        onChange={(e) => setNewMessage(e.target.value)}
-      />
-      <button onClick={sendMessage}>Send</button>
+    <div className="flex flex-col h-screen">
+      <Header />
+      <div className="flex-1 overflow-y-auto p-4">
+        {messages.map((message, index) => (
+          <div key={index} className="p-2 rounded bg-blue-100 my-2 w-max">
+            {message.content}
+          </div>
+        ))}
+      </div>
+      <div className="flex-none">
+        <input
+          type="text"
+          value={newMessage}
+          onChange={(e) => setNewMessage(e.target.value)}
+          className="w-full p-2 border rounded"
+        />
+        <button className="w-full py-2 bg-blue-500 text-white rounded" onClick={sendMessage}>Send</button>
+      </div>
     </div>
   )
 
