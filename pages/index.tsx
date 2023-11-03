@@ -27,7 +27,7 @@ export default function Home() {
       <table className="mt-8 w-full text-center">
         <thead>
           <tr>
-            <th>Conversation ID</th>
+            <th>ID</th>
           </tr>
         </thead>
         <tbody>
@@ -35,7 +35,7 @@ export default function Home() {
             <tr key={conversation.id}>
               <td>
                 <Link href={`/conversation/${conversation.id}`}>
-                  Conversation {conversation.id}
+                  {conversation.id}
                 </Link>
               </td>
             </tr>
